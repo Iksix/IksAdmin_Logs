@@ -1,0 +1,17 @@
+E:\__iksAdmin\IksAdmin_Logs\bin\Debug\net8.0\IksAdmin_Logs.deps.json
+E:\__iksAdmin\IksAdmin_Logs\bin\Debug\net8.0\IksAdmin_Logs.dll
+E:\__iksAdmin\IksAdmin_Logs\bin\Debug\net8.0\IksAdmin_Logs.pdb
+E:\__iksAdmin\IksAdmin_Logs\bin\Debug\net8.0\IksAdminApi.dll
+E:\__iksAdmin\IksAdmin_Logs\bin\Debug\net8.0\LogsApi.dll
+E:\__iksAdmin\IksAdmin_Logs\bin\Debug\net8.0\IksAdminApi.pdb
+E:\__iksAdmin\IksAdmin_Logs\bin\Debug\net8.0\LogsApi.pdb
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.csproj.AssemblyReference.cache
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.GeneratedMSBuildEditorConfig.editorconfig
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.AssemblyInfoInputs.cache
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.AssemblyInfo.cs
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.csproj.CoreCompileInputs.cache
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin.6531330C.Up2Date
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.dll
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\refint\IksAdmin_Logs.dll
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.pdb
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\ref\IksAdmin_Logs.dll
