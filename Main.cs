@@ -1,5 +1,6 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Commands;
 using IksAdminApi;
 using LogsApi;
 
@@ -46,7 +47,7 @@ public class Main : AdminModule
         PluginConfig.Instance = PluginConfig.Instance.ReadOrCreate(ModuleDirectory + "/../../configs/plugins/IksAdmin_Modules/Logs.json", PluginConfig.Instance);
         _config = PluginConfig.Instance;
         _logsApi = LogsCoreUtils.Api;
-        _logger = _logsApi.CreateBaseLogger("admin_logs");
+        _logger = _logsApi.CreateBaseLogger("IksAdmin");
         _logger.CanLogToDiscord = _config.LogToDiscord;
         _logger.CanLogToVk = _config.LogToVk;
         _logger.CanLogToConsole = _config.LogToConsole;
@@ -57,11 +58,33 @@ public class Main : AdminModule
     public override void Ready()
     {
         base.Ready();
+        /*
+        Добавить ивенты:
+        adminadd
+        admindel
+        */
         Api.OnDynamicEvent += OnDynamicEvent;
         Api.OnBanPost += OnBan;
         Api.SuccessUnban += OnUnban;
         Api.OnCommPost += OnComm;
         Api.SuccessUnComm += OnUnComm;
+        Api.OnCommandUsedPost += OnCommandUsed;
+    }
+
+    private HookResult OnCommandUsed(CCSPlayerController? caller, List<string> args, CommandInfo info)
+    {
+        var admin = caller.Admin();
+        if (admin == null){
+            return HookResult.Continue;
+        }
+        string embedKey = "commandUsed";
+        var embed = GetEmbed(embedKey);
+        embed.SetKeyValues(
+            ["adminId", "admin", "cmd"],
+            admin.SteamId, admin.CurrentName, info.GetCommandString
+        );
+        _logger.LogToAll(embed.ReplaceKeyValues(Localizer[embedKey]), vkChatId: _config.VkChatId, discordEmebed: embed, discordChannel: GetDiscordChannel(embedKey));
+        return HookResult.Continue;
     }
 
     private string BanType(int type) {
@@ -88,6 +111,21 @@ public class Main : AdminModule
                 return "Silence";
             default:
                 return "Mute";
+        }
+    }
+    private string Team(int type) {
+        switch (type)
+        {
+            case 0:
+                return "NONE";
+            case 1:
+                return "SPEC";
+            case 2:
+                return "T";
+            case 3:
+                return "CT";
+            default:
+                return "NONE";
         }
     }
 
@@ -128,8 +166,62 @@ public class Main : AdminModule
             case "error":
                 OnError(data.Get<string>("text"));
                 break;
+            case "slay_player_post":
+                OnSlay(data.Get<Admin>("admin"), data.Get<CCSPlayerController>("player"));    
+                break;
+            case "c_team_player_post":
+                OnChangeTeam(
+                data.Get<Admin>("admin"), 
+                data.Get<CCSPlayerController>("player"),
+                data.Get<int>("team"), false);    
+                break;
+            case "s_team_player_post":
+                OnChangeTeam(
+                data.Get<Admin>("admin"), 
+                data.Get<CCSPlayerController>("player"),
+                data.Get<int>("team"), true);    
+                break;
+            case "kick_player_pre":
+                OnKick(
+                data.Get<Admin>("admin"), 
+                data.Get<CCSPlayerController>("player"),
+                data.Get<string>("reason"));    
+                break;
         }
         return HookResult.Continue;
+    }
+
+    private void OnKick(Admin admin, CCSPlayerController player, string reason)
+    {
+        string embedKey = "slay";
+        var embed = GetEmbed(embedKey);
+        embed.SetKeyValues(
+            ["reason", "targetId", "targetIp", "target", "adminId", "admin",],
+            reason, player.GetSteamId(), player.GetIp() ?? "null", player.PlayerName, admin.SteamId, admin.CurrentName 
+        );
+        _logger.LogToAll(embed.ReplaceKeyValues(Localizer[embedKey]), vkChatId: _config.VkChatId, discordEmebed: embed, discordChannel: GetDiscordChannel(embedKey));
+    }
+
+    private void OnChangeTeam(Admin admin, CCSPlayerController player, int team, bool sTeam)
+    {
+        string embedKey = sTeam ? "switchTeam" : "changeTeam";
+        var embed = GetEmbed(embedKey);
+        embed.SetKeyValues(
+            ["team", "targetId", "targetIp", "target", "adminId", "admin",],
+            Team(team), player.GetSteamId(), player.GetIp() ?? "null", player.PlayerName, admin.SteamId, admin.CurrentName 
+        );
+        _logger.LogToAll(embed.ReplaceKeyValues(Localizer[embedKey]), vkChatId: _config.VkChatId, discordEmebed: embed, discordChannel: GetDiscordChannel(embedKey));
+    }
+
+    private void OnSlay(Admin admin, CCSPlayerController player)
+    {
+        string embedKey = "slay";
+        var embed = GetEmbed(embedKey);
+        embed.SetKeyValues(
+            ["targetId", "targetIp", "target", "adminId", "admin",],
+            player.GetSteamId(), player.GetIp() ?? "null", player.PlayerName, admin.SteamId, admin.CurrentName 
+        );
+        _logger.LogToAll(embed.ReplaceKeyValues(Localizer[embedKey]), vkChatId: _config.VkChatId, discordEmebed: embed, discordChannel: GetDiscordChannel(embedKey));
     }
 
     private void OnError(string text)
@@ -149,8 +241,8 @@ public class Main : AdminModule
             var embedKey = "comm";
             var embed = GetEmbed(embedKey);
             embed.SetKeyValues(
-                ["admin", "target", "duration", "type", "targetId", "targetIp"],
-                comm.Admin!.CurrentName, comm.Name!, AdminUtils.GetDurationString(comm.Duration), CommType(comm.MuteType), comm.SteamId ?? "null", comm.Ip ?? "null"
+                ["end", "reason", "admin", "adminId", "target", "duration", "type", "targetId", "targetIp"],
+                GetDateString(comm.EndAt), comm.Reason, comm.Admin!.CurrentName, comm.Admin!.SteamId, comm.Name!, AdminUtils.GetDurationString(comm.Duration), CommType(comm.MuteType), comm.SteamId ?? "null", comm.Ip ?? "null"
             );
             _logger.LogToAll(embed.ReplaceKeyValues(Localizer[embedKey]), vkChatId: _config.VkChatId, discordEmebed: embed, discordChannel: GetDiscordChannel("comm"));
         });

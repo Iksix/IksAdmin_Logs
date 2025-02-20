@@ -4,12 +4,11 @@
   "LogToFile": true,
   "LogToConsole": true,
   "Author": "Test server",
-  "ConsoleColor": "Cyan",
+  "ConsoleColor": "Cyan", 
   "VkChatId": 0,
-  "DiscordChannel": 0,
-  "CustomChannels": {
-    "ban": 123,
-    "comm": 123
+  "DiscordChannel": 0, // Дефолтный дс канал
+  "CustomChannels": { // Даёт возможность установить определённый канал, для определённых логов
+  //  "ban": 1233769364242863681
   },
   "Embeds": {
     "adminadd": {
@@ -255,12 +254,12 @@
         },
         {
           "Name": "**🎮 Игрок**",
-          "Value": "[**{name}**](https://steamcommunity.com/profiles/{steamId})",
+          "Value": "[**{target}**](https://steamcommunity.com/profiles/{targetId})",
           "InLine": true
         },
         {
           "Name": "🆔 SteamID",
-          "Value": "{steamId}",
+          "Value": "{targetId}",
           "InLine": true
         }
       ]
@@ -321,13 +320,8 @@
           "InLine": true
         },
         {
-          "Name": "🔁 Прошлая команда",
-          "Value": "```{oldTeam}```",
-          "InLine": false
-        },
-        {
           "Name": "🔁 Новая команда",
-          "Value": "```{newTeam}```",
+          "Value": "```{team}```",
           "InLine": false
         }
       ]
@@ -357,13 +351,8 @@
           "InLine": true
         },
         {
-          "Name": "🔁 Прошлая команда",
-          "Value": "```{oldTeam}```",
-          "InLine": false
-        },
-        {
           "Name": "🔁 Новая команда",
-          "Value": "```{newTeam}```",
+          "Value": "```{team}```",
           "InLine": false
         }
       ]
@@ -386,42 +375,6 @@
           "Name": "**📁 Команда**",
           "Value": "```{cmd}```",
           "InLine": true
-        }
-      ]
-    },
-    "rename": {
-      "Title": "**🎭 Действие, совершенное над игроком**",
-      "Description": "```Игроку сменили ник```",
-      "Color": {
-        "R": 255,
-        "G": 255,
-        "B": 255
-      },
-      "Fields": [
-        {
-          "Name": "**👮 Админ**",
-          "Value": "[**{admin}**](https://steamcommunity.com/profiles/{adminId})",
-          "InLine": true
-        },
-        {
-          "Name": "**🎮 Игрок**",
-          "Value": "[**{oldName}**](https://steamcommunity.com/profiles/{steamId})",
-          "InLine": true
-        },
-        {
-          "Name": "🆔 SteamID",
-          "Value": "{steamId}",
-          "InLine": true
-        },
-        {
-          "Name": "🤮 Старый ник",
-          "Value": "```{oldName}```",
-          "InLine": false
-        },
-        {
-          "Name": "😇 Новый ник",
-          "Value": "```{newName}```",
-          "InLine": false
         }
       ]
     }
