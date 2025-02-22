@@ -71,6 +71,16 @@ public class Main : AdminModule
         Api.OnCommandUsedPost += OnCommandUsed;
     }
 
+    public override void Unload(bool hotReload)
+    {
+        base.Unload(hotReload);
+        Api.OnDynamicEvent -= OnDynamicEvent;
+        Api.OnBanPost -= OnBan;
+        Api.SuccessUnban -= OnUnban;
+        Api.OnCommPost -= OnComm;
+        Api.SuccessUnComm -= OnUnComm;
+        Api.OnCommandUsedPost -= OnCommandUsed;
+    }
     private HookResult OnCommandUsed(CCSPlayerController? caller, List<string> args, CommandInfo info)
     {
         var admin = caller.Admin();
@@ -133,7 +143,7 @@ public class Main : AdminModule
     private void OnUnComm(Admin admin, PlayerComm comm)
     {
         Server.NextFrame(() => {
-            string embedKey = "unban";
+            string embedKey = "uncomm";
             var embed = GetEmbed(embedKey);
             embed.SetKeyValues(
                 ["admin", "adminId", "reason", "target", "targetIp", "targetId", "type"],
@@ -226,7 +236,7 @@ public class Main : AdminModule
 
     private void OnKick(Admin admin, CCSPlayerController player, string reason)
     {
-        string embedKey = "slay";
+        string embedKey = "kick";
         var embed = GetEmbed(embedKey);
         embed.SetKeyValues(
             ["reason", "targetId", "targetIp", "target", "adminId", "admin",],
