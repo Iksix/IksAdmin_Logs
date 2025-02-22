@@ -7,9 +7,9 @@
     "uncomm" : "**Блокировка чата снята** \n **Тип: {type}** \nАдмин: {admin}\nНик игрока: {target}\nSteamId64: {targetId}",
     "slay" : "**Игрок убит** \nАдмин: {admin}\nНик игрока: {target}\nSteamId64: {targetId}",
     "kick" : "**Игрок кикнут** \nАдмин: {admin}\nНик игрока: {target}\nSteamId64: {targetId}\nПричина: {reason}",
+    "adminadd" : "**Добавлен новый админ!** \nНик игрока: {admin} \nSteamId64: {adminId}\nФлаги: {flags}\nИммунитет: {immunity}\nИмя группы: {group}\nЗаканчивается: {end}",
+    "admindel" : "**Админ удалён!** \nНик игрока: {admin} \nSteamId64: {adminId}\nФлаги: {flags}\nИммунитет: {immunity}\nЗаканчивается: {end} \nИмя группы: {group}",
 
-    "VK_OnAdminAdd" : "**Добавлен новый админ!** \nНик игрока: {target} \nSteamId64: {targetId}\nФлаги: {flags}\nИммунитет: {immunity}\nЗаканчивается: {end} \nИмя группы: {grouptarget}\nАйди группы: {groupId}\n Айди сервера: {serverId}",
-    "VK_OnAdminDel" : "**Админ удалён!** \nНик игрока: {target} \nSteamId64: {targetId}\nФлаги: {flags}\nИммунитет: {immunity}\nЗаканчивается: {end} \nИмя группы: {grouptarget}\nАйди группы: {groupId}\n Айди сервера: {serverId}",
     "VK_SwitchTeam" : "**Игрок перемещён**\nАдмин: {admin}\nНик игрока: {target}\nSteamId64: {targetId}\nПрошлая команда: {oldTeam}\nНовая команда: {newTeam}",
     "VK_ChangeTeam" : "**Игроку сменили команду**\nАдмин: {admin}\nНик игрока: {target}\nSteamId64: {targetId}\nПрошлая команда: {oldTeam}\nНовая команда: {newTeam}",
     "VK_Retarget" : "**Игроку сменили ник**\nАдмин: {admin}\nНик игрока: {target}\nSteamId64: {targetId}\nПрошлый ник: {oldtarget}\nНовый ник: {newtarget}",

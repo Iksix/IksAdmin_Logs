@@ -137,7 +137,7 @@ public class Main : AdminModule
             var embed = GetEmbed(embedKey);
             embed.SetKeyValues(
                 ["admin", "adminId", "reason", "target", "targetIp", "targetId", "type"],
-                admin.CurrentName, admin.SteamId, comm.UnbanReason ?? "", comm.Name ?? "", comm.Ip ?? "", comm.SteamId ?? "", "", CommType(comm.MuteType)
+                admin.CurrentName, admin.SteamId, comm.UnbanReason ?? "", comm.Name ?? "", comm.Ip ?? "", comm.SteamId ?? "", CommType(comm.MuteType)
             );
             _logger.LogToAll(embed.ReplaceKeyValues(Localizer[embedKey]), vkChatId: _config.VkChatId, discordEmebed: embed, discordChannel: GetDiscordChannel(embedKey));
         });
@@ -187,8 +187,41 @@ public class Main : AdminModule
                 data.Get<CCSPlayerController>("player"),
                 data.Get<string>("reason"));    
                 break;
+            case "admin_create_pre":
+                OnAdminAdd(data.Get<Admin>("new_admin"));
+                break;
+            case "admin_delete_post":
+                OnAdminDel(data.Get<Admin>("new_admin"));
+                break;
         }
         return HookResult.Continue;
+    }
+
+    private void OnAdminAdd(Admin admin)
+    {
+        Server.NextFrame(() => {
+            string embedKey = "adminadd";
+            var embed = GetEmbed(embedKey);
+            embed.SetKeyValues(
+                ["group", "admin", "adminId", "flags", "immunity", "end"],
+                admin.Group?.Name ?? "not setted", admin.CurrentName, admin.SteamId, admin.CurrentFlags, admin.CurrentImmunity, GetDateString(admin.EndAt ?? 0)
+                
+            );
+            _logger.LogToAll(embed.ReplaceKeyValues(Localizer[embedKey]), vkChatId: _config.VkChatId, discordEmebed: embed, discordChannel: GetDiscordChannel(embedKey));
+        });
+    }
+    private void OnAdminDel(Admin admin)
+    {
+        Server.NextFrame(() => {
+            string embedKey = "admindel";
+            var embed = GetEmbed(embedKey);
+            embed.SetKeyValues(
+                ["group", "admin", "adminId", "flags", "immunity", "end"],
+                admin.Group?.Name ?? "not setted", admin.CurrentName, admin.SteamId, admin.CurrentFlags, admin.CurrentImmunity, GetDateString(admin.EndAt ?? 0)
+                
+            );
+            _logger.LogToAll(embed.ReplaceKeyValues(Localizer[embedKey]), vkChatId: _config.VkChatId, discordEmebed: embed, discordChannel: GetDiscordChannel(embedKey));
+        });
     }
 
     private void OnKick(Admin admin, CCSPlayerController player, string reason)

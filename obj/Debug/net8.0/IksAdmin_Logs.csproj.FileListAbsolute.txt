@@ -15,3 +15,4 @@ E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.dll
 E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\refint\IksAdmin_Logs.dll
 E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.pdb
 E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\ref\IksAdmin_Logs.dll
+E:\__iksAdmin\IksAdmin_Logs\obj\Debug\net8.0\IksAdmin_Logs.sourcelink.json

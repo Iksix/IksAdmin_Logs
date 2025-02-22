@@ -22,12 +22,12 @@
       "Fields": [
         {
           "Name": "**👮 Ник админа**",
-          "Value": "[**{name}**](https://steamcommunity.com/profiles/{steamId})",
+          "Value": "[**{admin}**](https://steamcommunity.com/profiles/{adminId})",
           "InLine": true
         },
         {
           "Name": "**📁 Группа**",
-          "Value": "```{groupName}```",
+          "Value": "```{group}```",
           "InLine": true
         },
         {
@@ -43,11 +43,6 @@
         {
           "Name": "**🏁 Заканчивается**",
           "Value": "```{end}```",
-          "InLine": true
-        },
-        {
-          "Name": "**🎮 Сервер**",
-          "Value": "```{serverId}```",
           "InLine": true
         }
       ]
@@ -63,12 +58,12 @@
       "Fields": [
         {
           "Name": "**👮 Ник админа**",
-          "Value": "[**{name}**](https://steamcommunity.com/profiles/{steamId})",
+          "Value": "[**{admin}**](https://steamcommunity.com/profiles/{adminId})",
           "InLine": true
         },
         {
           "Name": "**📁 Группа**",
-          "Value": "```{groupName}```",
+          "Value": "```{group}```",
           "InLine": true
         },
         {
@@ -84,11 +79,6 @@
         {
           "Name": "**🏁 Заканчивается**",
           "Value": "```{end}```",
-          "InLine": true
-        },
-        {
-          "Name": "**🎮 Сервер**",
-          "Value": "```{serverId}```",
           "InLine": true
         }
       ]
@@ -280,12 +270,12 @@
         },
         {
           "Name": "**🎮 Игрок**",
-          "Value": "[**{name}**](https://steamcommunity.com/profiles/{steamId})",
+          "Value": "[**{target}**](https://steamcommunity.com/profiles/{targetId})",
           "InLine": true
         },
         {
           "Name": "🆔 SteamID",
-          "Value": "{steamId}",
+          "Value": "{targetId}",
           "InLine": true
         },
         {
@@ -311,12 +301,12 @@
         },
         {
           "Name": "**🎮 Игрок**",
-          "Value": "[**{name}**](https://steamcommunity.com/profiles/{steamId})",
+          "Value": "[**{target}**](https://steamcommunity.com/profiles/{targetId})",
           "InLine": true
         },
         {
           "Name": "🆔 SteamID",
-          "Value": "{steamId}",
+          "Value": "{targetId}",
           "InLine": true
         },
         {
@@ -342,7 +332,7 @@
         },
         {
           "Name": "**🎮 Игрок**",
-          "Value": "[**{name}**](https://steamcommunity.com/profiles/{steamId})",
+          "Value": "[**{target}**](https://steamcommunity.com/profiles/{targetId})",
           "InLine": true
         },
         {
